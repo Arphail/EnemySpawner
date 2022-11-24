@@ -15,13 +15,12 @@ public class HealthBar : MonoBehaviour
         _healthBar = GetComponent<Slider>();
     }
 
-    private void Update()
+    public void OnHealthChanged()
     {
-        if (_healthBar.value != _creature.CurrentHealth)
-            StartCoroutine(SmoothHealthChanger());
+        StartCoroutine(SmoothHealthChange());
     }
 
-    private IEnumerator SmoothHealthChanger()
+    private IEnumerator SmoothHealthChange()
     {
         while (_healthBar.value != _creature.CurrentHealth)
         {

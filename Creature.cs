@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Creature : MonoBehaviour
 {
+    [SerializeField] private UnityEvent _healthChanged;
+
     private float _maxHealth = 50;
 
     public float CurrentHealth { get; private set; }
@@ -11,13 +14,10 @@ public class Creature : MonoBehaviour
         CurrentHealth = _maxHealth;
     }
 
-    private void Update()
+    public void ChangeHealth(float value)
     {
-        if (CurrentHealth < 0)
-            CurrentHealth = 0;
+        CurrentHealth += value;
+        CurrentHealth = Mathf.Clamp(CurrentHealth, 0, _maxHealth);
+        _healthChanged?.Invoke();
     }
-
-    public void TakeDamage(float damage) => CurrentHealth -= damage;
-    
-    public void Heal(float healingValue) => CurrentHealth += healingValue;
 }
