@@ -18,13 +18,13 @@ public class HealthBar : MonoBehaviour
 
     private void Update()
     {
-        Coroutine smoothHealthChanger = null;
+        Coroutine smoothHealthChanger;
 
         if (_healthBar.value != _creature.CurrentHealth)
+        {
             smoothHealthChanger = StartCoroutine(SmoothHealthChanger());
-
-        if (smoothHealthChanger == null)
             StopCoroutine(smoothHealthChanger);
+        }
     }
 
     private IEnumerator SmoothHealthChanger()
