@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,13 +17,8 @@ public class HealthBar : MonoBehaviour
 
     private void Update()
     {
-        Coroutine smoothHealthChanger;
-
         if (_healthBar.value != _creature.CurrentHealth)
-        {
-            smoothHealthChanger = StartCoroutine(SmoothHealthChanger());
-            StopCoroutine(smoothHealthChanger);
-        }
+            StartCoroutine(SmoothHealthChanger());
     }
 
     private IEnumerator SmoothHealthChanger()
